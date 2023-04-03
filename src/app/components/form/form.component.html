@@ -1,0 +1,119 @@
+<div class="mt-4">
+    <h4>Contactenos</h4>
+    <form (ngSubmit)="onSubmit()" [formGroup]="contactForm" autocomplete="off">
+
+    <section class="row">
+        <div class="col-md-6">
+            <div class="form-group mt-3">
+                <label class="form-label">Nombre</label>
+                <input
+                    formControlName="name"
+                    type="text"
+                    [ngClass]="{ 'is-invalid': inputControlIsInvalid(name) }"
+                    class="form-control"
+                >
+
+                <!-- Validaciones -->
+                <div *ngIf="!inputControlIsInvalid(name); else nameError" class="form-text">Mínimo 2 caracteres.</div>
+                <ng-template #nameError>
+                    <div *ngIf="name.hasError('required')" class="invalid-feedback">
+                        Este campo es requerido.
+                    </div>
+                    <div *ngIf="name.hasError('minlength')" class="invalid-feedback">
+                        Requiere un minimo de 2 caracteres.
+                    </div>
+                </ng-template>
+            </div>
+        
+            <div class="form-group mt-3">
+                <label class="form-label">Apellido</label>
+                <input
+                    formControlName="surname"
+                    type="text"
+                    [ngClass]="{ 'is-invalid': inputControlIsInvalid(surname) }"
+                    class="form-control"
+                >
+
+                <!-- Validaciones -->
+                <div *ngIf="!inputControlIsInvalid(surname); else surnameError" class="form-text">Mínimo 2 caracteres.</div>
+                <ng-template #surnameError>
+                    <div *ngIf="surname.hasError('required')" class="invalid-feedback">
+                        Este campo es requerido.
+                    </div>
+                    <div *ngIf="surname.hasError('minlength')" class="invalid-feedback">
+                        Requiere un minimo de 2 caracteres.
+                    </div>
+                </ng-template>
+            </div>
+        
+            <div class="form-group mt-3">
+                <label class="form-label">Email</label>
+                <input
+                    formControlName="email"
+                    type="text"
+                    [ngClass]="{ 'is-invalid': inputControlIsInvalid(email) }"
+                    class="form-control"
+                >
+
+                <!-- Validaciones -->
+                <div *ngIf="email.hasError('required')" class="invalid-feedback">
+                    Este campo es requerido.
+                </div>
+                <div *ngIf="email.hasError('email')" class="invalid-feedback">
+                    No es un email valido.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group mt-3">
+                <label class="form-label">Asunto</label>
+                <input
+                    formControlName="subject"
+                    type="text"
+                    [ngClass]="{ 'is-invalid': inputControlIsInvalid(subject) }"
+                    class="form-control"
+                >
+
+                <!-- Validaciones -->
+                <div *ngIf="!inputControlIsInvalid(subject); else subjectError" class="form-text">Mínimo 6 caracteres.</div>
+                <ng-template #subjectError>
+                    <div *ngIf="subject.hasError('required')" class="invalid-feedback">
+                        Este campo es requerido.
+                    </div>
+                    <div *ngIf="subject.hasError('minlength')" class="invalid-feedback">
+                        Requiere un minimo de 6 caracteres.
+                    </div>
+                </ng-template>
+            </div>
+
+            <div class="form-group mt-3">
+                <label class="form-label">Mensaje</label>
+                <textarea
+                    formControlName="message"
+                    [ngClass]="{ 'is-invalid': inputControlIsInvalid(message) }"
+                    class="form-control"
+                    rows="5"
+                ></textarea>
+
+                <!-- Validaciones -->
+                <div *ngIf="!inputControlIsInvalid(message); else messageError" class="form-text">Máximo 120 caracteres.</div>
+                <ng-template #messageError>
+                    <div *ngIf="message.hasError('required')" class="invalid-feedback">
+                        Este campo es requerido.
+                    </div>
+                    <div *ngIf="message.hasError('maxlength')" class="invalid-feedback">
+                        Supera el limite de caracteres permitidos, debe ser 120 como máximo.
+                    </div>
+                </ng-template>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="mt-5">
+        <button type="submit" class="btn btn-primary" [disabled]="contactForm.invalid">Enviar</button>
+    </div>
+
+    </form>
+</div>
+  
